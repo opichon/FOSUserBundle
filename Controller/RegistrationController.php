@@ -175,7 +175,7 @@ class RegistrationController extends Controller
     /**
      * @return mixed
      */
-    private function getTargetUrlFromSession()
+    protected function getTargetUrlFromSession()
     {
         $key = sprintf('_security.%s.target_path', $this->get('security.token_storage')->getToken()->getProviderKey());
 

@@ -42,7 +42,7 @@ class ChangePasswordFormType extends AbstractType
             'translation_domain' => 'FOSUserBundle',
             'mapped' => false,
             'constraints' => new UserPassword(array(
-                'message' => 'change_password.current_password_invalid',
+                'message' => 'fos_user.current_password.invalid',
                 'groups' =>  !empty($options['validation_groups']) ? array(reset($options['validation_groups'])) : null
             )),
         ));

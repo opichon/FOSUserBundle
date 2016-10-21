@@ -41,17 +41,9 @@ class ChangePasswordFormType extends AbstractType
             'label' => 'form.current_password',
             'translation_domain' => 'FOSUserBundle',
             'mapped' => false,
-            'constraints' => new UserPassword(
-                !empty($options['validation_groups'])
-                ? array(
-                    'message' => 'fos_user.current_password.invalid',
-                    'groups' =>  array(reset($options['validation_groups']))
-                )
-                : array(
-                    'message' => 'fos_user.current_password.invalid',
-                )
-            ),
+            'constraints' => new UserPassword($this->getUserPasswordConstraints($options)),
         ));
+
         $builder->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), array(
             'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
             'options' => array('translation_domain' => 'FOSUserBundle'),
@@ -89,5 +81,18 @@ class ChangePasswordFormType extends AbstractType
     public function getBlockPrefix()
     {
         return 'fos_user_change_password';
+    }
+
+    protected function getUserPasswordConstraints($options)
+    {
+        $constraints = array(
+            'message' => 'fos_user.current_password.invalid',
+        );
+
+        if (!empty($options['validation_groups'])) {
+            $constraints['groups'] = array(reset($options['validation_groups']));
+        }
+
+        return $constraints;
     }
 }

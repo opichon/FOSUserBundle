@@ -78,7 +78,7 @@ class RegistrationController extends Controller
     /**
      * Tell the user to check his email provider
      */
-    public function checkEmailAction()
+    public function checkEmailAction(Request $request)
     {
         $email = $this->get('session')->get('fos_user_send_confirmation_email/email');
         $this->get('session')->remove('fos_user_send_confirmation_email/email');
@@ -131,7 +131,7 @@ class RegistrationController extends Controller
     /**
      * Tell the user his account is now confirmed
      */
-    public function confirmedAction()
+    public function confirmedAction(Request $request)
     {
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -144,7 +144,7 @@ class RegistrationController extends Controller
         ));
     }
 
-    private function getTargetUrlFromSession()
+    protected function getTargetUrlFromSession()
     {
         // Set the SecurityContext for Symfony <2.6
         if (interface_exists('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')) {

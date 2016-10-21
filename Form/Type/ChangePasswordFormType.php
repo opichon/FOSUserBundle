@@ -35,7 +35,9 @@ class ChangePasswordFormType extends AbstractType
             'label' => 'form.current_password',
             'translation_domain' => 'FOSUserBundle',
             'mapped' => false,
-            'constraints' => new UserPassword(),
+            'constraints' => new UserPassword(array(
+                'message' => 'fos_user.current_password.invalid',
+            )),
         ));
         $builder->add('plainPassword', 'repeated', array(
             'type' => 'password',

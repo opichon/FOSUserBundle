@@ -46,10 +46,11 @@ class ChangePasswordFormType extends AbstractType
                 ? array(
                     'message' => 'fos_user.current_password.invalid',
                     'groups' =>  array(reset($options['validation_groups']))
+                )
                 : array(
                     'message' => 'fos_user.current_password.invalid',
                 )
-            )),
+            ),
         ));
         $builder->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), array(
             'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
